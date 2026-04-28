@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Tech | Next-Gen Shopping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #9d4edd;
+            --secondary: #3c096c;
+            --accent: #ff00ff;
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Glows */
+        .glow {
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, var(--primary), transparent 70%);
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            top: -10%;
+            left: -10%;
+        }
+
+        .glow-2 {
+            bottom: -10%;
+            right: -10%;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .btn-cart {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .btn-cart:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(157, 78, 221, 0.5);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -5%;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 55%;
+            height: 80%;
+            background: url('hero.png') center/cover no-repeat;
+            border-radius: 40px 0 0 40px;
+            box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.5);
+            animation: slideInRight 1.5s ease-out;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--bg), transparent 30%);
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translate(100px, -50%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(0, -50%);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .hero-image {
+                display: none;
+            }
+
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <nav>
+        <div class="logo">AURORA</div>
+        <ul class="nav-links">
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Innovations</a></li>
+            <li><a href="#">Sustainability</a></li>
+        </ul>
+        <button class="btn-cart">Cart (0)</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Experience <span>Future Living.</span></h1>
+            <p>Discover the next generation of lifestyle technology. Handcrafted aesthetics meeting cutting-edge
+                performance. Elevate your everyday with Aurora.</p>
+            <div class="cta-group">
+                <a href="#" class="btn-primary">Shop Now</a>
+                <a href="#" style="color: white; align-self: center; text-decoration: none; font-weight: 500;">View
+                    Lookbook →</a>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Pure Craft</h3>
+            <p>Every piece is engineered with precision and finished by hand for unparalleled quality.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Neural Sync</h3>
+            <p>Context-aware technology that learns your habits to provide a seamless experience.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Eco Armor</h3>
+            <p>Built with 100% recycled aerospace-grade materials without compromising on durability.</p>
+        </div>
+    </section>
+
+    <footer
+        style="padding: 50px 5%; border-top: 1px solid var(--glass-border); text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem;">
+        <p>&copy; 2026 AURORA TECH. ALL RIGHTS RESERVED.</p>
+    </footer>
+</body>
+
+</html>
